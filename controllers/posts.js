@@ -16,12 +16,12 @@ module.exports = {
     try {
       // // Initialize the player
       // var player = cloudinary.videoPlayer('example-player', { cloud_name: 'dsjvjkupo' });
-      var player = cloudinary.source('doc-player', { cloud_name: 'dsjvjkupo' });
+      // var player = cloudinary.videoPlayers('.cld-video-player', {fluid: true}, { hideContextMenu: true }, {autoplayMode: 'on-scroll'}, {loop: true}, {muted: true}, {playsinline: true});
       // Modify player source and play hls adaptive streaming
       // player.source({ sourceTypes: ['hls'],
       // transformation: { streaming_profile: 'full_hd' } }).play();
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts, player: player });
+      res.render("feed.ejs", { posts: posts, cloudinary: cloudinary });
     } catch (err) {
       console.log(err);
     }
