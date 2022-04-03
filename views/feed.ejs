@@ -1,20 +1,25 @@
 <%- include('partials/header') -%>
   <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
+    <div class="hero min-h-screen bg-base-300">
+      <ul class="hero-content flex-wrap lg:flex-row">
+      <% for(i = posts.length - 1; i >= 0; i--) {%>
+        <div class="artboard phone-1">
+          <li>
             <a href="/post/<%= posts[i]._id%>">
-              <div>
-                <video id="doc-player" style="max-width: 40vw"  controls  muted  class="cld-video-player cld-fluid" src="<%= posts[i].media %>"></video>
-              </div>
+              <figure>
+                <video id="doc-player"  controls  muted  class="min-h-fit max-h-fit cld-video-player cld-fluid rounded-xl shadow-2xl" src="<%= posts[i].media %>"></video>
+              </figure>
+              <!-- <div class="card-body bg-base-200 shadow-xl">
+                <div class="card-actions justify-end">
+                  <div class="badge badge-outline">Fashion</div> 
+                  <div class="badge badge-outline">Products</div>
+                </div>
+              </div> -->
             </a>
-            <p>
-              <%= posts[i].caption  %>
-            </p>
           </li>
-        <% } %>
-        </ul>
-    </div>
+        </div>
+      <% } %>
+      </ul>
+    </div>>
   </div>  
 <%- include('partials/footer') -%>
