@@ -4,6 +4,7 @@ const PostSchema = new mongoose.Schema({
   media: {
     type: String,
     require: true,
+    mediaType: '',
   },
   cloudinaryId: {
     type: String,

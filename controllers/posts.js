@@ -40,6 +40,7 @@ module.exports = {
       // jpeg heif => jpg
       // 
       await Post.create({
+        type: '',
         media: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
