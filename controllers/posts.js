@@ -15,7 +15,6 @@ module.exports = {
     try {
       // // Initialize the player
       // var player = cloudinary.videoPlayer('example-player', { cloud_name: 'dsjvjkupo' });
-      console.log(cloudinary);
       var player = cloudinary.source('doc-player', { cloud_name: 'dsjvjkupo' });
       // Modify player source and play hls adaptive streaming
       // player.source({ sourceTypes: ['hls'],
@@ -43,19 +42,15 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path, {resource_type: 'auto'});
-      let mediaFormat = '';
 
       // jpeg heif => jpg
-      if (result.secure_url.toLowerCase().endsWith('heic' || 'png' || 'jpeg' || 'heif')) {
-        result.secure_url = result.secure_url.replace(/heic|png|jpeg|heif$/i, 'jpg');
-        mediaFormat = 'jpg';
-      } else if (result.secure_url.toLowerCase().endsWith('hevc' || 'h.264')) {
-        result.secure_url = result.secure_url.replace(/heic|h.264$/i, 'mp4');
-        mediaFormat = 'mp4';  
+      if (result.secure_url.toLowerCase().endsWith('heic' || 'png' || 'jpeg' || 'heif' || 'jpg')) {
+        result.secure_url = result.secure_url.replace(/heic|png|jpeg|heif|jpg$/i, 'jpg');
+      } else if (result.secure_url.toLowerCase().endsWith('hevc' || 'h.264' || 'mp4')) {
+        result.secure_url = result.secure_url.replace(/heic|h.264|mp4$/i, 'mp4');
       }
 
       await Post.create({
-        mediaType: mediaFormat,
         media: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,

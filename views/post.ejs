@@ -2,8 +2,9 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
+      <!-- <h2><%= post.title %></h2> -->
+      <video id="doc-player" style="max-width: 70vw"  controls  muted  class="cld-video-player cld-fluid" src="<%= post.media %>"></video>
+      <p><%= post.caption %></p>
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -25,7 +26,6 @@
       </div>
     </div>
     <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

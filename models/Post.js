@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  mediaType: {
-    type: String,
-    require: true,
-  },
   media: {
     type: String,
     require: true,
