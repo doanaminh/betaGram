@@ -24,11 +24,13 @@
       <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <video id="doc-player" style="max-width: 20vw"  controls  muted  class="cld-video-player cld-fluid" src="<%= posts[i].media %>"></video>
-            </a>
-          </li>
+          <div class="card w-96 bg-base-100 shadow-xl">
+            <li class="col-6 justify-content-between mt-5">
+              <a href="/post/<%= posts[i]._id%>">
+                <video id="doc-player" style="max-width: 20vw"  controls  muted  class="cld-video-player cld-fluid" src="<%= posts[i].media %>"></video>
+              </a>
+            </li>
+          </div>
         <% } %>
         </ul>
       </div>  
