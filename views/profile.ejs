@@ -1,33 +1,36 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-                <a class="btn btn-primary" href="/feed">Return to Feed</a>
-              <!-- <p><strong>Email</strong>: <%= user.email %></p> -->
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+      <div class="navbar bg-base-200">
+          <div class="flex-1">
+              <p><%= user.userName %></p>
           </div>
-          <div class="mt-5">
-            <h2>Add a Post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <input type="file" class="form-control" id="mediaUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Post</button>
-            </form>
+          <div class="flex-none">
+            <ul class="menu menu-horizontal p-0">
+              <li>
+                <label for="my-modal-3" class="btn modal-button btn-ghost normal-case text-xl">Add Post</label>
+              </li>
+              <li><a class="btn btn-ghost normal-case text-xl" href="/feed">Feed</a></li>
+              <li><a href="/logout" class="btn btn-ghost normal-case text-xl">Logout</a></li>
+            </ul>
           </div>
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
-          <div class="card w-96 bg-base-100 shadow-xl">
-            <li class="col-6 justify-content-between mt-5">
+          <div class="card w-96 bg-base-300 shadow-xl">
+            <li>
               <a href="/post/<%= posts[i]._id%>">
-                <video id="doc-player" style="max-width: 20vw"  controls  muted  class="cld-video-player cld-fluid" src="<%= posts[i].media %>"></video>
+                <figure>
+                  <video id="doc-player"  controls  muted  class="cld-video-player cld-fluid" src="<%= posts[i].media %>"></video>
+                </figure>
+                <div class="card-body">
+                  <p><%= posts[i].caption %></p>
+                  <div class="card-actions justify-end">
+                    <!-- <div class="badge badge-outline">Fashion</div> 
+                    <div class="badge badge-outline">Products</div> -->
+                  </div>
+                </div>
               </a>
             </li>
           </div>
@@ -35,6 +38,22 @@
         </ul>
       </div>  
     </div>
+  </div>
+</div>
+<input type="checkbox" id="my-modal-3" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box relative">
+    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+    <h2 class="text-3xl">Post Beta</h2>
+    <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+      <div class="mb-3">
+        <textarea class="form-control textarea textarea-primary" id="caption" name="caption"></textarea>
+      </div>
+      <div class="mb-3">
+        <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
+      </div>
+      <button type="submit" class="btn btn-primary" value="Upload">Post</button>
+    </form>
   </div>
 </div>
 <%- include('partials/footer') -%>
