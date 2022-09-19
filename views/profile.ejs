@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="navbar bg-base-200">
+      <div class="navbar b/g-base-200">
           <div class="flex-1">
               <p><%= user.userName %></p>
           </div>
@@ -18,7 +18,7 @@
       <div class="hero min-h-screen bg-base-300">
         <ul class="hero-content flex-wrap lg:flex-row">
         <% for(i = posts.length - 1; i >= 0; i--) {%>
-          <div class="artboard phone-3">
+          <div class="artboard phone-1">
             <li>
               <a href="/post/<%= posts[i]._id%>">
                 <figure>
