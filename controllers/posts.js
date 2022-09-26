@@ -20,6 +20,11 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      // Initialize the player
+      var player = cloudinary.videoPlayer('example-player', { cloud_name: CLOUD_NAME });
+      // Modify player source and play hls adaptive streaming
+      player.source({ sourceTypes: ['hls'],
+      transformation: { streaming_profile: 'full_hd' } }).play();
       const post = await Post.findById(req.params.id);
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
@@ -29,11 +34,13 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.path, {resource_type: 'auto'});
 
+      if (result.secure_url.toLowerCase().endsWith('heic')) result.secure_url = result.secure_url.replace(/heic$/i, 'jpg')
+      // jpeg heif => jpg
+      // 
       await Post.create({
-        title: req.body.title,
-        image: result.secure_url,
+        media: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
         likes: 0,
