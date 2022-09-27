@@ -35,12 +35,19 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path, {resource_type: 'auto'});
+      let mediaFormat = '';
 
-      if (result.secure_url.toLowerCase().endsWith('heic')) result.secure_url = result.secure_url.replace(/heic$/i, 'jpg')
       // jpeg heif => jpg
-      // 
+      if (result.secure_url.toLowerCase().endsWith('heic' || 'png' || 'jpeg' || 'heif')) {
+        result.secure_url = result.secure_url.replace(/heic|png|jpeg|heif$/i, 'jpg');
+        mediaFormat = 'jpg';
+      } else if (result.secure_url.toLowerCase().endsWith('hevc' || 'h.264')) {
+        result.secure_url = result.secure_url.replace(/heic|h.264$/i, 'mp4');
+        mediaFormat = 'mp4';  
+      }
+
       await Post.create({
-        type: '',
+        mediaType: mediaFormat,
         media: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
