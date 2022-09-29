@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+require("dotenv").config({ path: "./config/.env" });
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -12,8 +13,15 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
+      // // Initialize the player
+      // var player = cloudinary.videoPlayer('example-player', { cloud_name: 'dsjvjkupo' });
+      console.log(cloudinary);
+      var player = cloudinary.source('doc-player', { cloud_name: 'dsjvjkupo' });
+      // Modify player source and play hls adaptive streaming
+      // player.source({ sourceTypes: ['hls'],
+      // transformation: { streaming_profile: 'full_hd' } }).play();
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts, player: player });
     } catch (err) {
       console.log(err);
     }
@@ -21,10 +29,10 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       // Initialize the player
-      var player = cloudinary.videoPlayer('example-player', { cloud_name: CLOUD_NAME });
-      // Modify player source and play hls adaptive streaming
-      player.source({ sourceTypes: ['hls'],
-      transformation: { streaming_profile: 'full_hd' } }).play();
+      // var player = cloudinary.videoPlayer('example-player', { cloud_name: CLOUD_NAME });
+      // // Modify player source and play hls adaptive streaming
+      // player.source({ sourceTypes: ['hls'],
+      // transformation: { streaming_profile: 'full_hd' } }).play();
       const post = await Post.findById(req.params.id);
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {

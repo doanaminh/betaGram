@@ -5,7 +5,10 @@
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
-              <iframe class="vid-fluid" src="<%= posts[i].media %>"></iframe>
+              <div>
+                <video id="doc-player" style="max-width: 40vw"  controls  muted  class="cld-video-player cld-fluid" src="<%= posts[i].media %>"></video>
+              </div>
+                <!-- <source src="<%= posts[i].media %>"> -->
             </a>
             <p>
               <%= posts[i].caption  %>
