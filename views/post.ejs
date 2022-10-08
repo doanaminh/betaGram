@@ -37,7 +37,7 @@
     </div>
     <div class="mt-5">
       <h2>Add a comment</h2>
-      <form action="/comment/createComment" method="POST">
+      <form action="/comment/createComment/<%= post._id %>" method="POST">
         <div class="mb-3">
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
