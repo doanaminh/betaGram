@@ -35,7 +35,33 @@
         <p>`<%= post.user.userName %> <%= post.caption %>`</p>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment" method="POST">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
+    </div>
+    <div>
+      <ul>
+        <% for(var i=0; i<comment.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+           User <%= comment[i].createdBy%> says: "
+           <%= comment[i].comment%> "
+          <%if(comment[i].createdById == user.id){ %>
+        <form
+          action="/comment/deleteComment/<%= post.id %>/<%= comments[i]._id %>?_method=DELETE"
+          method="POST"
+          class="col-3"
+        >
+        <button class="btn btn-outline-danger" type="submit">Delete</button>
+        </form>
+        <%}%>
+      </li>
+      <% } %>
+      </ul>
     </div>
   </div>
 </div>

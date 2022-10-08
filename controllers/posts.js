@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 require("dotenv").config({ path: "./config/.env" });
 
 module.exports = {
@@ -33,7 +34,10 @@ module.exports = {
       // player.source({ sourceTypes: ['hls'],
       // transformation: { streaming_profile: 'full_hd' } }).play();
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comment = await Comment.find({post: req.params.id}).sort({
+        createdAt: 'asc'
+      }).lean();
+      res.render("post.ejs", { post: post, user: req.user, comment: comment });
     } catch (err) {
       console.log(err);
     }
