@@ -2,7 +2,7 @@
 <!-- Navbar -->
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a href="/feed" class="btn btn-ghost normal-case text-xl">betaGram</a>
+    <a href="/feed" class="btn btn-ghost normal-case text-xl text-amber-400">betaGram</a>
   </div>
   <div class="flex-none gap-2">
     <!-- Searchbar -->
@@ -24,10 +24,11 @@
   </div>
 </div>
 <!-- END Navbar -->
-<div class="hero max-h-screen bg-base-300">
-  <div class="artboard phone-1">
-    <div>
-      <video id="doc-player" autoplay muted loop class="rounded-xl cld-video-player cld-fluid" src="<%= post.media %>"></video>
+
+<div class="hero min-h-screen bg-base-200">
+  <div class="hero-content flex-col lg:flex-row">
+    <div class="artboard phone-1">
+      <video id="doc-player" controls controlslist="nodownload" autoplay muted loop class="rounded-xl cld-video-player cld-fluid" src="<%= post.media %>"></video>
     </div>
     <div class="btn-group">
       <form
@@ -51,37 +52,48 @@
       <h3 class="col-3"><%= post.likes %> likes</h3>
     </div>
     <div>
-      <p>`<%= post.caption %>`</p>
+      <p>user: <%= post.caption %></p>
     </div>
     <div class="mt-5">
-      <h2>Add a comment</h2>
-      <form action="/comment/createComment/<%= post._id %>" method="POST">
-        <div class="mb-3">
-            <input type="text" class="form-control" id="comment" name="comment">
+      <!-- The button to open modal -->
+      <label for="my-modal-6" class="btn modal-button">Leave a comment</label>
+      <!-- Put this part before </body> tag -->
+      <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+      <div class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <h3 class="font-bold text-lg">Say something nice!</h3>
+          <form action="/comment/createComment/<%= post._id %>" method="POST">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="comment" name="comment">
+            </div>
+            <button type="submit" class="btn btn-primary" value="Upload">send vibes</button>
+          </form>
+          <div class="modal-action">
+            <label for="my-modal-6" class="btn">close</label>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-      </form>
+      </div>
     </div>
-  </div>
-  <div>
-    <ul>
-      <% for(var i=0; i<comment.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
-         User <%= comment[i].createdBy%> says: "
-         <%= comment[i].comment%> "
-        <%if(comment[i].createdById == user.id){ %>
-      <form
-        action="/comment/deleteComment/<%= post.id %>/<%= comment[i]._id %>?_method=DELETE"
-        method="POST"
-        class="col-3"
-      >
-      <button class="btn btn-outline-danger" type="submit">Delete</button>
-      </form>
-      <%}%>
-    </li>
-    <% } %>
-    </ul>
-  </div>
+    <div>
+      <ul>
+        <% for(var i=0; i<comment.length; i++) {%>
+          <li class="text-white">
+           <%= comment[i].createdBy%>:
+           <%= comment[i].comment%>
+          <%if(comment[i].createdById == user.id){ %>
+        <form
+          action="/comment/deleteComment/<%= post.id %>/<%= comment[i]._id %>?_method=DELETE"
+          method="POST"
+          class="col-3"
+        >
+        <button class="btn btn-outline-danger" type="submit">Delete</button>
+        </form>
+        <%}%>
+      </li>
+      <% } %>
+      </ul>
+    </div>
+    </div>
   </div>
 </div>
 
