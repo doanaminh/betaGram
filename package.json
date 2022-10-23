@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "100Devs Social Network",
   "main": "server.js",
-  "builds": [
-    {"src": "app.js", "use": "@vercel/node"}
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/server.js"}
-  ]
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
