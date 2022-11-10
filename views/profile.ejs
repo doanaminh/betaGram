@@ -1,5 +1,6 @@
 <%- include('partials/header') -%>
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <div class="container">
       <a href="/feed" class="navbar-brand">betaGram</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
@@ -9,64 +10,42 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <!-- MODAL BUTTON -->
-            <a class="nav-link pe-cursor" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Spray
             </a>
           </li>
           <li class="navbar-item">
-            <a class="nav-link"><%= user.userName %></a>
+            <a href="/profile" class="nav-link"><%= user.userName %></a>
           </li>
           <li class="navbar-item">
             <a href="/logout" class="nav-link">Logout</a>
           </li>
         </ul>
       </div>
-      
     </div>
   </nav>
   <!-- END Navbar -->
 
   <!-- Posts -->
-  <div class="hero min-h-screen bg-base-300">
-    <ul class="hero-content flex-wrap lg:flex-row">
-    <% for(i = posts.length - 1; i >= 0; i--) {%>
-      <div class="artboard phone-1">
-        <li>
-          <a href="/post/<%= posts[i]._id%>">
-            <figure>
-              <video id="doc-player"  controls  muted  class="min-h-fit max-h-fit cld-video-player cld-fluid rounded-xl shadow-2xl" src="<%= posts[i].media %>"></video>
-            </figure>
-            <!-- <div class="card-body bg-base-200 shadow-xl">
-              <div class="card-actions justify-end">
-                <div class="badge badge-outline">Fashion</div> 
-                <div class="badge badge-outline">Products</div>
-              </div>
-            </div> -->
-          </a>
-        </li>
-      </div>
-    <% } %>
-    </ul>
-  </div>  
-</div>
+  <section class="bg-dark d-flex flex-wrap justify-content-evenly">
+    <% for(i = 0; i < posts.length; i++) {%>
+      <figure>
+        <a class="text-decoration-none text-danger" href="/post/<%= posts[i]._id%>">
+          <div class="card" style="width: 18rem;">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <video id="doc-player" loop muted class="cld-video-player img-fluid" src="<%= posts[i].media %>"></video>
+            <div class="card-body">
+              <p class="card-text fw-bold"><%= posts[i].likes %> likes</p>
+              <p class="card-text "><%= posts[i].caption %></p>
 
-<!-- Modal Input Box -->
-<!-- <input type="checkbox" id="my-modal-3" class="modal fade" tabindex="-1" aria-labelledby="my-modal-3" aria-hidden="true" />
-<div class="modal">
-  <div class="modal-box relative">
-    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-    <h2 class="text-3xl">Post Beta</h2>
-    <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-      <div class="mb-3">
-        <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
-      </div>
-      <div class="mb-3">
-        <textarea class="form-control textarea textarea-primary" id="caption" name="caption"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" value="Upload">Spray</button>
-    </form>
-  </div>
-</div> -->
+            </div>
+          </div>
+        </a>
+      </figure>
+    <% } %>
+    </section>
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -80,7 +59,7 @@
           <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
         </div>
         <div class="mb-3">
-          <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="caption . . ."></textarea>
+          <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Caption . . ."></textarea>
         </div>
       </form>
       <div class="modal-footer">
@@ -89,7 +68,5 @@
     </div>
   </div>
 </div>
-
-
 
 <%- include('partials/footer') -%>

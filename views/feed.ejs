@@ -1,69 +1,69 @@
 <%- include('partials/header') -%>
 
-<div class="container">
-  <!-- Navbar -->
-  <div class="navbar bg-base-100">
-    <div class="flex-1">
-      <a href="/feed" class="text-amber-400 btn btn-ghost normal-case text-xl">betaGram</a>
-    </div>
-    <div class="flex-none gap-2">
-      <!-- Searchbar -->
-      <!-- <div class="form-control">
-        <input type="text" placeholder="Search" class="input input-bordered" />
-      </div> -->
-      <div>
-        <label for="my-modal-3" class="btn modal-button btn-ghost text-3xl text-white">+</label>
-      </div>
-      <div class="dropdown dropdown-end">
-        <label tabindex="0" class="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        </label>
-        <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/logout">Logout</a></li>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+      <a href="/feed" class="navbar-brand text-warning">betaGram</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <!-- MODAL BUTTON -->
+            <a href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Spray
+            </a>
+          </li>
+          <li class="navbar-item">
+            <a href="/profile" class="nav-link"><%= user.userName %></a>
+          </li>
+          <li class="navbar-item">
+            <a href="/logout" class="nav-link">Logout</a>
+          </li>
         </ul>
       </div>
     </div>
-  </div>
+  </nav>
   <!-- END Navbar -->
-  <div class="hero min-h-screen bg-base-300">
-    <ul class="hero-content flex-wrap lg:flex-row">
+
+  <section class="bg-dark d-flex flex-wrap justify-content-evenly">
     <% for(i = 0; i < posts.length; i++) {%>
-      <div class="artboard phone-1">
-        <li>
-          <a href="/post/<%= posts[i]._id%>">
-            <figure>
-              <video id="doc-player" loop muted class="min-h-fit max-h-fit cld-video-player cld-fluid rounded-xl shadow-2xl" src="<%= posts[i].media %>"></video>
-            </figure>
-            <!-- <div class="card-body bg-base-200 shadow-xl">
-              <div class="card-actions justify-end">
-                <div class="badge badge-outline">Fashion</div> 
-                <div class="badge badge-outline">Products</div>
-              </div>
-            </div> -->
-          </a>
-        </li>
-      </div>
+      <figure>
+        <a class="text-decoration-none text-danger" href="/post/<%= posts[i]._id%>">
+          <div class="card" style="width: 18rem;">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <video id="doc-player" loop muted class="cld-video-player img-fluid" src="<%= posts[i].media %>"></video>
+            <div class="card-body">
+              <p class="card-text fw-bold"><%= posts[i].likes %> likes</p>
+              <p class="card-text "><%= posts[i].caption %></p>
+            </div>
+          </div>
+        </a>
+      </figure>
     <% } %>
-    </ul>
-  </div>
-</div>  
+    </section>
 
 <!-- Code for add post button content to populate -->
-<input type="checkbox" id="my-modal-3" class="modal-toggle" />
-<div class="modal">
-  <div class="modal-box relative">
-    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-    <h2 class="text-3xl">Post Beta</h2>
-    <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-      <div class="mb-3">
-        <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Spray your beta!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="mb-3">
-        <textarea class="form-control textarea textarea-primary" id="caption" name="caption"></textarea>
+      <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+        <div class="mb-3">
+          <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Caption . . ."></textarea>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
       </div>
-      <button type="submit" class="btn btn-primary" value="Upload">Spray</button>
-    </form>
+    </div>
   </div>
 </div>
 <%- include('partials/footer') -%>

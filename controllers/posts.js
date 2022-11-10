@@ -21,7 +21,7 @@ module.exports = {
       // player.source({ sourceTypes: ['hls'],
       // transformation: { streaming_profile: 'full_hd' } }).play();
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts, cloudinary: cloudinary });
+      res.render("feed.ejs", { posts: posts, cloudinary: cloudinary, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -33,6 +33,18 @@ module.exports = {
       // // Modify player source and play hls adaptive streaming
       // player.source({ sourceTypes: ['hls'],
       // transformation: { streaming_profile: 'full_hd' } }).play();
+
+      // DATE CONVERTER
+      Date.prototype.yyyymmdd = function() {
+        var mm = this.getMonth() + 1; // getMonth() is zero-based
+        var dd = this.getDate();
+      
+        return [this.getFullYear(),
+                (mm>9 ? '' : '0') + mm,
+                (dd>9 ? '' : '0') + dd
+               ].join('');
+      };
+
       const post = await Post.findById(req.params.id);
       const comment = await Comment.find({post: req.params.id}).sort({
         createdAt: 'asc'
