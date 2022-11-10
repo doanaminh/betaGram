@@ -1,5 +1,5 @@
 {
-  "name": "binary-upload-boom",
+  "name": "beta-gram",
   "version": "1.0.0",
   "description": "100Devs Social Network",
   "main": "server.js",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@xmldom/xmldom": "^0.8.3",
     "bcrypt": "^5.0.1",
+    "bootstrap": "^5.2.2",
     "cloudinary": "^1.32.0",
     "cloudinary-video-player": "^1.9.3",
     "connect-mongo": "^3.2.0",
