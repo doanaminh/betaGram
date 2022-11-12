@@ -28,7 +28,7 @@
 
   <!-- Posts -->
   <section class="bg-dark d-flex flex-wrap justify-content-evenly">
-    <% for(i = 0; i < posts.length; i++) {%>
+    <% for(i = posts.length - 1; i >= 0; i--) {%>
       <figure>
         <a class="text-decoration-none text-danger" href="/post/<%= posts[i]._id%>">
           <div class="card" style="width: 18rem;">
@@ -61,10 +61,10 @@
         <div class="mb-3">
           <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Caption . . ."></textarea>
         </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
+        </div>
       </form>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
-      </div>
     </div>
   </div>
 </div>

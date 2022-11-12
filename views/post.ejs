@@ -40,10 +40,10 @@
         <div class="mb-3">
           <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Caption . . ."></textarea>
         </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
+        </div>
       </form>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
-      </div>
     </div>
   </div>
 </div>
@@ -79,7 +79,7 @@
 
       <div>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#commentModal">
           Comment
         </button>
         <!-- Modal -->
@@ -93,12 +93,12 @@
               <div class="modal-body">
                 <form action="/comment/createComment/<%= post._id %>" method="POST">
                   <div class="mb-3">
-                      <input type="text" class="form-control" id="comment" name="comment">
+                      <input type="text" class="form-control" id="comment" name="comment" placeholder="That was an amazing send!">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" value="Upload">send vibes</button>
                   </div>
                 </form>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" value="Upload">send vibes</button>
               </div>
             </div>
           </div>

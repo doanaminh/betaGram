@@ -1,33 +1,33 @@
 <%- include('partials/header') -%>
 
-<main class="hero min-h-fit  bg-base-100">
-  <div class="hero-content flex-col lg:flex-row-reverse">
+<main class="bg-dark vh-100">
+  <div class="container py-5">
     <div class="text-center lg:text-left">
-      <h1 class="text-amber-400 text-5xl font-bold"><a href="/feed">betaGram</a></h1>
-      <p class="py-6">Share and view betas of your favorite climbs!</p>
+      <h1><a class="text-warning text-decoration-none" href="/feed">betaGram</a></h1>
+      <p class="text-muted">Share and view betas of your favorite climbs!</p>
     </div>
-    <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
+    <div class="card bg-dark">
       <div class="card-body">
         <form action="/login" method="POST">
-          <div class="form-control">
+          <div class="form-control bg-dark border-dark">
             <label for="exampleInputEmail1" class="form-label">
-              <span class="label-text">Email</span>
+              <span class="label-text text-light">Email</span>
             </label>
-            <input type="email" placeholder="example@mail.com" class="form-control input input-bordered" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"/>
+            <input type="email" placeholder="example@mail.com" class="form-control input input-bordered bg-dark text-light" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"/>
           </div>
-          <div class="form-control">
+          <div class="form-control bg-dark border-dark">
             <label for="exampleInputPassword1" class="form-label label">
-              <span class="label-text">Password</span>
+              <span class="label-text text-light">Password</span>
             </label>
-            <input type="password" placeholder="password" class="form-control input input-bordered" id="exampleInputPassword1" name="password"/>
+            <input type="password" placeholder="password" class="form-control input input-bordered bg-dark text-light" id="exampleInputPassword1" name="password"/>
             <!-- Implement password recovery with email -->
             <!-- <label class="label">
               <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
             </label> -->
           </div>
-          <div class="form-control mt-6">
+          <div class="form-control bg-dark border-dark">
             <button type="submit" class="btn btn-primary">Login</button>
-            <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+            <a href="/signup" class="col-3 btn btn-success"> Signup</a>
           </div>
         </form>
       </div>
