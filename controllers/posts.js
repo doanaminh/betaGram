@@ -14,12 +14,6 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      // // Initialize the player
-      // var player = cloudinary.videoPlayer('example-player', { cloud_name: 'dsjvjkupo' });
-      // var player = cloudinary.videoPlayers('.cld-video-player', {fluid: true}, { hideContextMenu: true }, {autoplayMode: 'on-scroll'}, {loop: true}, {muted: true}, {playsinline: true});
-      // Modify player source and play hls adaptive streaming
-      // player.source({ sourceTypes: ['hls'],
-      // transformation: { streaming_profile: 'full_hd' } }).play();
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts, cloudinary: cloudinary, user: req.user });
     } catch (err) {
@@ -28,12 +22,6 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      // Initialize the player
-      // var player = cloudinary.videoPlayer('example-player', { cloud_name: CLOUD_NAME });
-      // // Modify player source and play hls adaptive streaming
-      // player.source({ sourceTypes: ['hls'],
-      // transformation: { streaming_profile: 'full_hd' } }).play();
-
       // DATE CONVERTER
       Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1; // getMonth() is zero-based
@@ -72,6 +60,7 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        createdAt: Date.now,
       });
       console.log("Post has been added!");
       res.redirect("/profile");
