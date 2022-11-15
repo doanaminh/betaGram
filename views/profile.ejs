@@ -2,7 +2,7 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <div class="container">
-      <a href="/feed" class="navbar-brand">betaGram</a>
+      <a href="/feed" class="navbar-brand text-warning fs-1">betaGram</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,7 +27,7 @@
   <!-- END Navbar -->
 
   <!-- Posts -->
-  <section class="bg-dark d-flex flex-wrap justify-content-evenly vh-100">
+  <section class="bg-dark d-flex flex-wrap justify-content-evenly">
     <% for(i = posts.length - 1; i >= 0; i--) {%>
       <figure>
         <a class="text-decoration-none text-danger" href="/post/<%= posts[i]._id%>">
