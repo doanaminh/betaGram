@@ -8,7 +8,7 @@ module.exports = multer({
   fileFilter: (req, file, cb) => {
     let ext = path.extname(file.originalname);
     console.log(ext);
-    if (ext !== '.hevc' && ext !== '.h.264' && ext !== '.mp4') {
+    if (ext !== '.hevc' && ext !== '.h.264' && ext !== '.mp4' && ext !== '.MOV') {
       cb(new Error("File type is not supported"), false);
       return;
     }
