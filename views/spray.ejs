@@ -1,0 +1,83 @@
+<%- include('partials/header') -%>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+      <a href="/feed" class="navbar-brand text-warning fs-1">betaGram</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <!-- MODAL BUTTON -->
+            <a href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Spray
+            </a>
+          </li>
+          <li class="navbar-item">
+            <a href="/profile" class="nav-link"><%= user.userName %></a>
+          </li>
+          <li class="navbar-item">
+            <a href="/logout" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Code for add post button content to populate -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Spray your beta!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+          <div class="mb-3">
+            <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Please enter a caption . . ."></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- END Navbar -->
+
+<main class="bg-dark vh-100">
+  <div class="container py-5">
+    <div class="card bg-dark">
+      <div class="card-body">
+        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+          <div class="alert alert-warning">
+            <div>
+              <span><%= el.msg %></span>
+            </div>
+          </div>
+          <% }) %> <% } %> <% if (locals.messages.info) { %> 
+          <% messages.info.forEach( el => { %>
+          <div class="alert alert-danger"><%= el.msg %></div>
+          <% }) %> <% } %>
+          <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+            <div class="mb-3">
+              <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Caption . . ."></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') -%>

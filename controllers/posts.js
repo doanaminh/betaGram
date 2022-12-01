@@ -20,6 +20,14 @@ module.exports = {
       console.log(err);
     }
   },
+  getSpray: async (req, res) => {
+    try {
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      res.render("spray.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getPost: async (req, res) => {
     try {
       // DATE CONVERTER

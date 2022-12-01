@@ -2,7 +2,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <div class="container">
-    <a href="/feed" class="navbar-brand text-warning">betaGram</a>
+    <a href="/feed" class="navbar-brand text-warning fs-1">betaGram</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,12 +33,22 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Spray your beta!</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+        <div class="alert alert-warning">
+          <div>
+            <span><%= el.msg %></span>
+          </div>
+        </div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> 
+        <% messages.info.forEach( el => { %>
+        <div class="alert alert-danger"><%= el.msg %></div>
+      <% }) %> <% } %>
       <form action="/post/createPost" enctype="multipart/form-data" method="POST">
         <div class="mb-3">
           <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
         </div>
         <div class="mb-3">
-          <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Caption . . ."></textarea>
+          <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Please enter a caption . . ."></textarea>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
@@ -50,82 +60,81 @@
 <!-- END Navbar -->
 
 
-<section class="bg-dark d-flex flex-wrap justify-content-evenly">
+<section class="bg-dark d-flex flex-wrap justify-content-evenly pb-1">
+  <figure class="figure">
+    <div class="card text-danger" style="width: 18rem;">
+      <video id="doc-player" controls controlslist="nodownload" autoplay muted loop class="img-fluid img-thumbnail" src="<%= post.media %>"></video>
+      <div class="card-body">
+        <div class="btn-group d-flex justify-content-start">
+          <form
+            class="col-1"
+            action="/post/likePost/<%= post.id %>?_method=PUT"
+            method="POST"
+          >
+          <button class="btn fa fa-heart" type="submit"></button>
+          </form>
+          <%if(post.user == user.id){ %>
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+        </div>
+        <p class="card-text fw-bold"><%= post.likes %> likes</p>
+        <p class="card-text "><%= post.caption %></p>
   
-    <figure class="figure">
-      <div class="card text-danger" style="width: 18rem;">
-        <video id="doc-player" controls controlslist="nodownload" autoplay muted loop class="img-fluid img-thumbnail" src="<%= post.media %>"></video>
-        <div class="card-body">
-          <div class="btn-group d-flex justify-content-start">
-            <form
-              class="col-1"
-              action="/post/likePost/<%= post.id %>?_method=PUT"
-              method="POST"
-            >
-            <button class="btn fa fa-heart" type="submit"></button>
-            </form>
-            <%if(post.user == user.id){ %>
-            <form
-              action="/post/deletePost/<%= post.id %>?_method=DELETE"
-              method="POST"
-              class="col-3"
-            >
-              <button class="btn fa fa-trash" type="submit"></button>
-            </form>
-            <%}%>
-          </div>
-          <p class="card-text fw-bold"><%= post.likes %> likes</p>
-          <p class="card-text "><%= post.caption %></p>
-    
-          <div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#commentModal">
-              Comment
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Say something nice!</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form action="/comment/createComment/<%= post._id %>" method="POST">
-                      <div class="mb-3">
-                          <input type="text" class="form-control" id="comment" name="comment" placeholder="That was an amazing send!">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" value="Upload">send vibes</button>
-                      </div>
-                    </form>
-                  </div>
+        <div>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#commentModal">
+            Comment
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Say something nice!</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/comment/createComment/<%= post._id %>" method="POST">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="comment" name="comment" placeholder="That was an amazing send!">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" value="Upload">send vibes</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-          <!-- End Modal code -->
-          <div>
-            <ul class="list-group list-group-flush">
-              <% for(var i=0; i<comment.length; i++) {%>
-                <li class="list-group-item text-muted">
-                 <a><%= comment[i].createdBy%>:</a>
-                 <%= comment[i].comment%>
-                <%if(comment[i].createdById == user.id){ %>
-                <form
-                  action="/comment/deleteComment/<%= post.id %>/<%= comment[i]._id %>?_method=DELETE"
-                  method="POST"
-                  class="col-3"
-                >
-                <button class="btn btn-outline-danger" type="submit">Delete</button>
-                </form>
-                <%}%>
-                </li>
-              <% } %>
-            </ul>
           </div>
+        <!-- End Modal code -->
+        <div>
+          <ul class="list-group list-group-flush">
+            <% for(var i=0; i<comment.length; i++) {%>
+              <li class="list-group-item text-muted">
+               <a><%= comment[i].createdBy%>:</a>
+               <%= comment[i].comment%>
+              <%if(comment[i].createdById == user.id){ %>
+              <form
+                action="/comment/deleteComment/<%= post.id %>/<%= comment[i]._id %>?_method=DELETE"
+                method="POST"
+                class="col-3"
+              >
+              <button class="btn btn-outline-danger" type="submit">Delete</button>
+              </form>
+              <%}%>
+              </li>
+            <% } %>
+          </ul>
         </div>
       </div>
-    </figure>
+    </div>
+  </figure>
 </section>
 
 <%- include('partials/footer') -%>

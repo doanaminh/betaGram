@@ -13,8 +13,8 @@
               <span><%= el.msg %></span>
             </div>
           </div>
-          <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-          messages.info.forEach( el => { %>
+          <% }) %> <% } %> <% if (locals.messages.info) { %> 
+          <% messages.info.forEach( el => { %>
           <div class="alert alert-danger"><%= el.msg %></div>
           <% }) %> <% } %>
         <form action="/signup" method="POST">
