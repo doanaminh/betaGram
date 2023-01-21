@@ -5,6 +5,7 @@ const path = require("path");
 
 module.exports = multer({
   storage: multer.diskStorage({}),
+  limits: { fileSize: maxSize },
   fileFilter: (req, file, cb) => {
     let ext = path.extname(file.originalname);
     console.log(ext);
