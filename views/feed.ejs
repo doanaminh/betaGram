@@ -33,7 +33,7 @@
         <a class="text-decoration-none text-danger" href="/post/<%= posts[i]._id%>">
           <div class="card" style="width: 18rem;">
             <!-- <img src="..." class="card-img-top" alt="..."> -->
-            <video id="doc-player" loop muted class="cld-video-player img-fluid" src="<%= posts[i].media %>"></video>
+            <video id="doc-player" loop muted poster preload class="cld-video-player img-fluid" src="<%= posts[i].media %>"></video>
             <div class="card-body">
               <p class="card-text fw-bold"><%= posts[i].likes %> likes</p>
               <p class="card-text "><%= posts[i].caption %></p>
