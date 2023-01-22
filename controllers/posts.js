@@ -53,7 +53,7 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path, {resource_type: 'video'});
+      const result = await cloudinary.uploader.upload(req.file.path, {resource_type: 'auto'});
 
       // jpeg heif => jpg
       if (result.secure_url.toLowerCase().endsWith('heic' || 'png' || 'jpeg' || 'heif' || 'jpg')) {
