@@ -70,7 +70,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect(`/post/${req.params.id}`);
+      res.redirect(`/feed`);
     } catch (err) {
       console.log(err);
     }
