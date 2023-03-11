@@ -10,9 +10,9 @@ module.exports = {
   },
   ensureGuest: function (req, res, next) {
     if (!req.isAuthenticated()) {
-      return next();
+      res.redirect("/feed-guest");
     } else {
-      res.redirect("/feed");
+      return next();
     }
   },
   ensureCreate: function (req, res, next) {

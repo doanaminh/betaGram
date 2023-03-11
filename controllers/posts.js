@@ -20,6 +20,14 @@ module.exports = {
       console.log(err);
     }
   },
+  getFeedGuest: async (req, res) => {
+    try {
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      res.render("feed-guest.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   // getSpray: async (req, res) => {
   //   try {
   //     const posts = await Post.find().sort({ createdAt: "desc" }).lean();

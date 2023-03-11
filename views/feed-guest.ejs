@@ -1,0 +1,55 @@
+<%- include('partials/header') -%>
+<body class="bg-dark">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+      <a href="/feed" class="navbar-brand text-warning fs-1">betaGram</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+      </div>
+    </div>
+  </nav>
+  <!-- END Navbar -->
+
+  <section class="bg-dark d-flex flex-wrap justify-content-evenly">
+    <% for(i = 0; i < 5; i++) {%>
+      <figure>
+        <a class="text-decoration-none text-danger" href="/post/<%= posts[i]._id%>">
+          <div class="card" style="width: 18rem;">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <video id="doc-player" loop muted poster preload class="cld-video-player img-fluid" src="<%= posts[i].media %>"></video>
+            <div class="card-body">
+              <p class="card-text fw-bold"><%= posts[i].likes %> likes</p>
+              <p class="card-text "><%= posts[i].caption %></p>
+            </div>
+          </div>
+        </a>
+      </figure>
+    <% } %>
+    </section>
+
+<!-- Code for add post button content to populate -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Spray your beta!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+        <div class="mb-3">
+          <input type="file" class="form-control select select-primary w-full max-w-xs" id="mediaUpload" name="file">
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control textarea textarea-primary" id="caption" name="caption" placeholder="Please enter a caption . . .**Only videos that are under 100mb will be accepted."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" value="Upload">Spray!</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>

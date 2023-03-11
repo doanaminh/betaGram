@@ -1,7 +1,7 @@
 {
   "name": "beta-gram",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "Climbing Betas Database",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
